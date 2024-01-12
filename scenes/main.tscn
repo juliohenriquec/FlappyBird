@@ -1,0 +1,38 @@
+[gd_scene load_steps=10 format=3 uid="uid://bj3tvjehtqina"]
+
+[ext_resource type="Script" path="res://scripts/GameManager.gd" id="1_iy6od"]
+[ext_resource type="PackedScene" uid="uid://bjj30hsg0kex2" path="res://scenes/bird.tscn" id="1_snswd"]
+[ext_resource type="Texture2D" uid="uid://bwf5i0qyei8n0" path="res://assets/background-day.png" id="1_usdl3"]
+[ext_resource type="AudioStream" uid="uid://dtyet4nyogsni" path="res://assets/sounds/sfx_die.mp3" id="2_k6srn"]
+[ext_resource type="AudioStream" uid="uid://t4jepcpo5gf8" path="res://assets/sounds/sfx_point.mp3" id="3_8f0ss"]
+[ext_resource type="PackedScene" uid="uid://c3vfy5udeyvku" path="res://scenes/ground.tscn" id="3_xw6qm"]
+[ext_resource type="PackedScene" uid="uid://jnc53u8nt7qo" path="res://scenes/pipe_spawner.tscn" id="4_ufl6o"]
+[ext_resource type="PackedScene" uid="uid://b5m3g132i8yf8" path="res://scenes/fade.tscn" id="6_stxyq"]
+[ext_resource type="PackedScene" uid="uid://b7y5875wr83bo" path="res://scenes/ui.tscn" id="7_mgmtw"]
+
+[node name="Main" type="Node"]
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_iy6od")
+
+[node name="GameOver" type="AudioStreamPlayer" parent="GameManager"]
+stream = ExtResource("2_k6srn")
+
+[node name="Points" type="AudioStreamPlayer" parent="GameManager"]
+stream = ExtResource("3_8f0ss")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("1_usdl3")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Ground" parent="." instance=ExtResource("3_xw6qm")]
+position = Vector2(24, 200)
+
+[node name="PipeSpawner" parent="." instance=ExtResource("4_ufl6o")]
+
+[node name="Bird" parent="." instance=ExtResource("1_snswd")]
+
+[node name="Fade" parent="." instance=ExtResource("6_stxyq")]
+
+[node name="UI" parent="." instance=ExtResource("7_mgmtw")]

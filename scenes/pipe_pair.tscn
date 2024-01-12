@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://bfhs7s2cbdjim"]
+
+[ext_resource type="Script" path="res://scripts/pipe_pair.gd" id="1_7q46q"]
+[ext_resource type="Texture2D" uid="uid://drx10uoxjpba5" path="res://assets/pipe-green.png" id="2_331up"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lj7gm"]
+size = Vector2(48, 479)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mnbec"]
+size = Vector2(48, 480)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f1msr"]
+size = Vector2(10, 125)
+
+[node name="PapePair" type="Node2D"]
+script = ExtResource("1_7q46q")
+
+[node name="TopPipe" type="Area2D" parent="."]
+position = Vector2(0, -300)
+
+[node name="Sprite2D" type="Sprite2D" parent="TopPipe"]
+rotation = 3.14159
+texture = ExtResource("2_331up")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopPipe"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_lj7gm")
+
+[node name="BottomPipe" type="Area2D" parent="."]
+position = Vector2(0, 300)
+
+[node name="Sprite2D" type="Sprite2D" parent="BottomPipe"]
+texture = ExtResource("2_331up")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomPipe"]
+shape = SubResource("RectangleShape2D_mnbec")
+
+[node name="Scored" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scored"]
+position = Vector2(39, -1)
+shape = SubResource("RectangleShape2D_f1msr")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="body_entered" from="TopPipe" to="." method="_on_body_entered"]
+[connection signal="body_entered" from="BottomPipe" to="." method="_on_body_entered"]
+[connection signal="body_entered" from="Scored" to="." method="_on_point_scored"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
